@@ -1,4 +1,4 @@
-export class XorshiftAlgo {
+export default class XorshiftAlgo {
   private seed: number;
 
   constructor();

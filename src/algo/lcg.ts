@@ -1,5 +1,5 @@
 // LCG: Linear Congruential Generator
-export class LCG {
+export default class LCG {
   private seed: number;
   private readonly multiplier: number = 1664525;
   private readonly increment: number = 1013904223;

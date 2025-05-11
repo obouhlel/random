@@ -1,5 +1,5 @@
 // MSM : Middle square method
-export class MSM {
+export default class MSM {
   private seed: number;
 
   constructor();

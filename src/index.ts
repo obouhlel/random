@@ -1,6 +1,6 @@
-import { MSM } from "algo/msm";
-import { LCG } from "algo/lcg";
-import { XorshiftAlgo } from "algo/xorshifting";
+import MSM from "algo/msm";
+import LCG from "algo/lcg";
+import XorshiftAlgo from "algo/xorshifting";
 
 const min = 1;
 const max = 2;
