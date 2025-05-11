@@ -1,12 +1,25 @@
 // MSM : Middle square method
-let SEED: number = Math.round(Math.random() * 1000);
+export class MSM {
+  private seed: number;
 
-export function msm(): number {
-  const squared = (SEED * SEED).toString().padStart(6, "0");
-  let result = parseInt(squared.slice(1, 4));
-  if (SEED === result) {
-    result += 1;
+  constructor();
+  constructor(seed: number);
+
+  constructor(seed?: number) {
+    if (!seed) {
+      this.seed = Math.round(Math.random() * 1000);
+    } else {
+      this.seed = seed;
+    }
   }
-  SEED = result;
-  return result;
+
+  next(): number {
+    const squared = (this.seed * this.seed).toString().padStart(6, "0");
+    let result = parseInt(squared.slice(1, 4));
+    if (this.seed === result) {
+      result += 1;
+    }
+    this.seed = result;
+    return result;
+  }
 }

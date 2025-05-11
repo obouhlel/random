@@ -1,4 +1,4 @@
-import { msm } from "algo/msm";
+import { MSM } from "algo/msm";
 import { LCG } from "algo/lcg";
 
 const min = 1;
@@ -7,7 +7,6 @@ const runs = 10;
 const samples = 100;
 
 // Paramètres pour LCG
-const lcgSeed = Math.round(Math.random() * 1000);
 const lcgA = 1664525;
 const lcgC = 1013904223;
 const lcgM = 2 ** 32;
@@ -23,6 +22,7 @@ let msmPrecisions: number[] = [];
 let lcgPrecisions: number[] = [];
 
 for (let r = 0; r < runs; r++) {
+  const seed = Math.round(Math.random() * 1000);
   // Math.random
   const mathrandomValue = [];
   for (let i = 0; i < samples; i++) {
@@ -33,20 +33,23 @@ for (let r = 0; r < runs; r++) {
 
   // MSM
   const msmValues = [];
+  const msm = new MSM(seed);
   for (let i = 0; i < samples; i++) {
-    const value = (msm() % (max - min + 1)) + min;
+    const value = (msm.next() % (max - min + 1)) + min;
     msmValues.push(value);
   }
   msmPrecisions.push(getPrecision(msmValues));
 
   // LCG
-  const lcg = new LCG(lcgSeed + r, lcgA, lcgC, lcgM);
+  const lcg = new LCG(seed, lcgA, lcgC, lcgM);
   const lcgValues = [];
   for (let i = 0; i < samples; i++) {
     const value = (lcg.next() % (max - min + 1)) + min;
     lcgValues.push(value);
   }
   lcgPrecisions.push(getPrecision(lcgValues));
+
+  // Xorshift algorithm
 }
 
 const avgMathPrecision = mathPrecisions.reduce((a, b) => a + b, 0) / runs;
